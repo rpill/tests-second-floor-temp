@@ -53,8 +53,11 @@ if (!checkDevDependencies('stylelint')) {
 
 const extensions = getStyleExtensions('.');
 let extension;
-if (extensions.length > 1 || extensions.length === 0) {
-  redLog('There are no style files with the extension either.css, or .scss')
+if (extensions.length === 0) {
+  redLog('There are no style files')
+  process.exit(1);
+} else if(extensions.length > 1) {
+  redLog('Files with styles must have one extension. For example, .scss')
   process.exit(1);
 } else {
   extension = extensions[0];
